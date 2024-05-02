@@ -1,7 +1,7 @@
 CREATE TABLE Antena_Comunic (
   Antena_Comunic SERIAL NOT NULL,
   Complexo_Comunicacao SERIAL NOT NULL,
-  idAntena_Comunic POINT NOT NULL AUTO_INCREMENT,
+  idAntena_Comunic INTEGER NOT NULL,
   Complexo_Comunicacao_Org_Pub_Civil SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Antena_Comunic),
@@ -10,7 +10,7 @@ CREATE TABLE Antena_Comunic (
 
 CREATE TABLE Area_Comunicacao (
   Area_Comunicacao SERIAL NOT NULL,
-  idArea_Comunicacao POLYGON NOT NULL AUTO_INCREMENT,
+  idArea_Comunicacao POLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Area_Comunicacao)
 );
@@ -18,7 +18,7 @@ CREATE TABLE Area_Comunicacao (
 CREATE TABLE Area_Energia_Eletrica (
   Area_Energia_Eletrica SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica_Org_Pub_Civil SERIAL NOT NULL,
-  idArea_Energia_Eletrica POLYGON NOT NULL AUTO_INCREMENT,
+  idArea_Energia_Eletrica POLYGON NOT NULL ,
   Complexo_Gerador_Energia_Eletrica SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Area_Energia_Eletrica),
@@ -29,7 +29,8 @@ CREATE TABLE Barragem (
   Barragem SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica_Org_Pub_Civil SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica SERIAL NOT NULL,
-  idBarragem MULTIPOINT NOT NULL AUTO_INCREMENT,
+    idBarragem MULTIPOINT NOT NULL,
+
   Desc_2 TEXT NULL,
   PRIMARY KEY(Barragem),
   INDEX Barragem_FKIndex1(Complexo_Gerador_Energia_Eletrica, Complexo_Gerador_Energia_Eletrica_Org_Pub_Civil)
@@ -39,7 +40,7 @@ CREATE TABLE Complexo_Comunicacao (
   Org_Pub_Civil SERIAL NOT NULL,
   Complexo_Comunicacao SERIAL NOT NULL,
   Area_Comunicacao SERIAL NOT NULL,
-  idComplexo_Comunicacao MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idComplexo_Comunicacao MULTIPOLYGON NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Org_Pub_Civil, Complexo_Comunicacao),
   INDEX Complexo_Comunicacao_FKIndex1(Area_Comunicacao),
@@ -54,7 +55,7 @@ CREATE TABLE Complexo_Gerador_Energia_Eletrica (
   Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia SERIAL NOT NULL,
   Edif_Energia SERIAL NOT NULL,
   Est_Gerad_Energia_Eletrica SERIAL NOT NULL,
-  idComplexo_Gerador_Energia_Eletrica MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idComplexo_Gerador_Energia_Eletrica MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Complexo_Gerador_Energia_Eletrica, Org_Pub_Civil),
   INDEX Complexo_Gerador_Energia_Eletrica_FKIndex1(Org_Pub_Civil),
@@ -72,7 +73,7 @@ CREATE TABLE Condutor_Hidrico (
   Hidreletrica_Est_Gerad_Energia_Eletrica SERIAL NOT NULL,
   Termeletrica_Est_Gerad_Energia_Eletrica SERIAL NOT NULL,
   Termeletrica SERIAL NOT NULL,
-  idCondutor_Hidrico LINESTRING NOT NULL AUTO_INCREMENT,
+  idCondutor_Hidrico LINESTRING NOT NULL ,
   Massa_Dagua SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica SERIAL NOT NULL,
   Desc_2 TEXT NULL,
@@ -85,7 +86,7 @@ CREATE TABLE Condutor_Hidrico (
 
 CREATE TABLE Desposito_Geral (
   Desposito_Geral SERIAL NOT NULL,
-  idDesposito_Geral MULTIPOINT NOT NULL AUTO_INCREMENT,
+  idDesposito_Geral MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Desposito_Geral)
 );
@@ -93,7 +94,7 @@ CREATE TABLE Desposito_Geral (
 CREATE TABLE Edif_comunic (
   Edif_comunic SERIAL NOT NULL,
   Complexo_Comunicacao SERIAL NOT NULL,
-  idEdif_comunic MULTIPOINT NOT NULL AUTO_INCREMENT,
+  idEdif_comunic MULTIPOLYGON NOT NULL ,
   Complexo_Comunicacao_Org_Pub_Civil SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Edif_comunic),
@@ -104,7 +105,7 @@ CREATE TABLE Edif_Energia (
   Edif_Energia SERIAL NOT NULL,
   Subest_Transm_Distrib_Energia_Eletrica SERIAL NOT NULL,
   Subest_Transm_Distrib_Energia_Eletrica_Ponto_Trecho_Energia SERIAL NOT NULL,
-  idEdif_Energia MULTIPOINT NOT NULL AUTO_INCREMENT,
+  idEdif_Energia MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Edif_Energia),
   INDEX Edif_Energia_FKIndex1(Subest_Transm_Distrib_Energia_Eletrica_Ponto_Trecho_Energia, Subest_Transm_Distrib_Energia_Eletrica)
@@ -113,7 +114,7 @@ CREATE TABLE Edif_Energia (
 CREATE TABLE Est_Gerad_Energia_Eletrica (
   Est_Gerad_Energia_Eletrica SERIAL NOT NULL,
   Ponto_Trecho_Energia SERIAL NOT NULL,
-  idEst_Gerad_Energia_Eletrica MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idEst_Gerad_Energia_Eletrica MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Est_Gerad_Energia_Eletrica, Ponto_Trecho_Energia),
   INDEX Est_Gerad_Energia_Eletrica_FKIndex1(Ponto_Trecho_Energia)
@@ -123,7 +124,7 @@ CREATE TABLE Hidreletrica (
   Est_Gerad_Energia_Eletrica SERIAL NOT NULL,
   Hidreletrica SERIAL NOT NULL,
   Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia SERIAL NOT NULL,
-  idHidreletrica MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idHidreletrica MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Est_Gerad_Energia_Eletrica, Hidreletrica, Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia),
   INDEX Hidreletrica_FKIndex1(Est_Gerad_Energia_Eletrica, Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia)
@@ -131,7 +132,7 @@ CREATE TABLE Hidreletrica (
 
 CREATE TABLE Massa_Dagua (
   Massa_Dagua SERIAL NOT NULL,
-  idMassa_Dagua POLYGON NOT NULL AUTO_INCREMENT,
+  idMassa_Dagua POLYGON NOT NULL ,
   Reservatorio_Hidrico_Reservatorio_Hidrico SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Massa_Dagua),
@@ -140,21 +141,21 @@ CREATE TABLE Massa_Dagua (
 
 CREATE TABLE Org_Pub_Civil (
   Org_Pub_Civil SERIAL NOT NULL,
-  idOrg_Pub_Civil MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idOrg_Pub_Civil MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Org_Pub_Civil)
 );
 
 CREATE TABLE Ponto_Trecho_Energia (
   Ponto_Trecho_Energia SERIAL NOT NULL,
-  idPonto_Trecho_Energia POINT NOT NULL AUTO_INCREMENT,
+  idPonto_Trecho_Energia INTEGER NOT NULL,
   PRIMARY KEY(Ponto_Trecho_Energia)
 );
 
 CREATE TABLE Reservatorio_Hidrico (
   Reservatorio_Hidrico SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica_Org_Pub_Civil SERIAL NOT NULL,
-  idReservatorio_Hidrico POLYGON NOT NULL AUTO_INCREMENT,
+  idReservatorio_Hidrico POLYGON NOT NULL ,
   Complexo_Gerador_Energia_Eletrica SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Reservatorio_Hidrico),
@@ -164,7 +165,7 @@ CREATE TABLE Reservatorio_Hidrico (
 CREATE TABLE Subest_Transm_Distrib_Energia_Eletrica (
   Ponto_Trecho_Energia SERIAL NOT NULL,
   Subest_Transm_Distrib_Energia_Eletrica SERIAL NOT NULL,
-  idSubest_Transm_Distrib_Energia_Eletrica MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idSubest_Transm_Distrib_Energia_Eletrica MULTIPOLYGON NOT NULL ,
   Area_Energia_Eletrica_Area_Energia_Eletrica SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Ponto_Trecho_Energia, Subest_Transm_Distrib_Energia_Eletrica),
@@ -178,7 +179,7 @@ CREATE TABLE Termeletrica (
   Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia SERIAL NOT NULL,
   Trecho_Duto_Trecho_Duto SERIAL NOT NULL,
   Desposito_Geral_Desposito_Geral SERIAL NOT NULL,
-  idTermeletrica MULTIPOLYGON NOT NULL AUTO_INCREMENT,
+  idTermeletrica MULTIPOLYGON NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Termeletrica, Est_Gerad_Energia_Eletrica, Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia),
   INDEX Termeletrica_FKIndex1(Est_Gerad_Energia_Eletrica, Est_Gerad_Energia_Eletrica_Ponto_Trecho_Energia),
@@ -190,7 +191,7 @@ CREATE TABLE Torre_Comunic (
   Torre_Comunic SERIAL NOT NULL,
   Complexo_Comunicacao SERIAL NOT NULL,
   Antena_Comunic SERIAL NOT NULL,
-  idTorre_Comunic POINT NOT NULL AUTO_INCREMENT,
+  idTorre_Comunic INTEGER NOT NULL,
   Trecho_Cominic_Trecho_Cominic SERIAL NOT NULL,
   Complexo_Comunicacao_Org_Pub_Civil SERIAL NOT NULL,
   Desc_2 TEXT NULL,
@@ -202,7 +203,7 @@ CREATE TABLE Torre_Comunic (
 
 CREATE TABLE Torre_Energia (
   Torre_Energia SERIAL NOT NULL,
-  idTorre_Energia POINT NOT NULL AUTO_INCREMENT,
+  idTorre_Energia INTEGER NOT NULL,
   Zona_Linhas_Energia_Comunicacao SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Torre_Energia),
@@ -211,7 +212,7 @@ CREATE TABLE Torre_Energia (
 
 CREATE TABLE Trecho_Cominic (
   Trecho_Cominic SERIAL NOT NULL,
-  idTrecho_Cominic LINESTRING NOT NULL AUTO_INCREMENT,
+  idTrecho_Cominic LINESTRING NOT NULL ,
   Zona_Linhas_Energia_Comunicacao SERIAL NOT NULL,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Trecho_Cominic),
@@ -220,14 +221,14 @@ CREATE TABLE Trecho_Cominic (
 
 CREATE TABLE Trecho_Duto (
   Trecho_Duto SERIAL NOT NULL,
-  idTrecho_Duto LINESTRING NOT NULL AUTO_INCREMENT,
+  idTrecho_Duto LINESTRING NOT NULL ,
   Desc_2 TEXT NULL,
   PRIMARY KEY(Trecho_Duto)
 );
 
 CREATE TABLE Trecho_Energia (
   Trecho_Energia SERIAL NOT NULL,
-  idTrecho_Energia LINESTRING NOT NULL AUTO_INCREMENT,
+  idTrecho_Energia LINESTRING NOT NULL ,
   Torre_Energia SERIAL NOT NULL,
   Zona_Linhas_Energia_Comunicacao SERIAL NOT NULL,
   Ponto_Trecho_Energia SERIAL NOT NULL,
@@ -241,7 +242,7 @@ CREATE TABLE Trecho_Energia (
 CREATE TABLE Zona_Linhas_Energia_Comunicacao (
   Zona_Linhas_Energia_Comunicacao SERIAL NOT NULL,
   Complexo_Comunicacao SERIAL NOT NULL,
-  idZona_Linhas_Energia_Comunicacao POLYGON NOT NULL AUTO_INCREMENT,
+  idZona_Linhas_Energia_Comunicacao POLYGON NOT NULL ,
   Complexo_Comunicacao_Org_Pub_Civil SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica_Org_Pub_Civil SERIAL NOT NULL,
   Complexo_Gerador_Energia_Eletrica SERIAL NOT NULL,
